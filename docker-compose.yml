@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: icon_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - icon_network
+
+  redis:
+    image: redis:alpine
+    container_name: icon_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - icon_network
+
+  backend:
+    build: ./backend
+    container_name: icon_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/icon
+      - PORT=5000
+      - JWT_SECRET=mysecretkey
+      - REDIS_URL=redis://redis:6379
+      - CLIENT_URL=http://localhost
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - icon_network
+
+  frontend:
+    build: ./frontend
+    container_name: icon_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - icon_network
+
+volumes:
+  mongo-data:
+
+networks:
+  icon_network:
+    driver: bridge
