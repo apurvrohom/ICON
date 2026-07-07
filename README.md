@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ICON - Enterprise Idea-CONnect Collaboration Platform
 
 ICON is a production-grade, highly scalable team collaboration platform (akin to a hybrid of LinkedIn and GitHub) designed for modern engineering teams. It allows users to register profiles, discover public workspaces, collaborate via shared notes, upload resources, manage tasks on a real-time Kanban board, and chat inside instant message channels.
@@ -166,3 +167,6 @@ Execute Vitest store tests:
 cd frontend
 npm run test
 ```
+=======
+# ICON
+>>>>>>> bf08717e706dd87bd006bb5cb372b7f81206fd8b
